@@ -1,0 +1,88 @@
+<body>
+ 
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signin">
+
+
+            <form [formGroup]="signinForm" (ngSubmit)="signinUser()">
+                <label style="margin-left: 100px;" for="chk" aria-hidden="true"><img style="width: 5rem;" src="/assets/images/arruLOGO.png"> Espace Personnel </label>
+ 
+                <div class="form-group">
+                    <input type="email" formControlName="email" class="form-control" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Email" size="44" style="margin-left:35px;">
+                    <div *ngIf="email.touched && email.invalid" class="text-danger">
+                        <div *ngIf="email.errors.required">
+                            <small> * Email obligatoire</small>
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            <small> * Email invalide</small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input  type="password" formControlName="password" class="form-control" id="exampleInputPassword"
+                        placeholder="Mot de passe" size="44"  style="margin-left:35px;" >
+                    <div *ngIf="password.touched && password.invalid" class="text-danger">
+                        <div *ngIf="password.errors.required">
+                            <small> * Mot de passe obligatoire</small>
+                        </div>
+                         
+                    </div>
+
+                </div>
+
+                <button [disabled]="signinForm.invalid" type="submit">
+                    Connexion
+                </button>
+
+                <br> <br>
+
+                <!-- <hr>
+                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Login with Google
+                                </a>
+                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                </a> -->
+
+            </form>
+
+
+        </div>
+
+        <div class="password">
+            <form [formGroup]="passwordForm" class="user" (ngSubmit)="passwordUser()">
+
+                <label for="chk" aria-hidden="true" style="color: rgb(15, 23, 99);padding-top: 15px; margin-left: 80
+                                px; font-size:1.4rem;"> Mot de passe oublié ? </label>
+
+                <div class="entre" style="color: rgb(15, 23, 99);">Tapez votre e-mail ci-dessous et vous <br> allez recevoir un lien pour réinitialiser <br> votre
+                    mot de passe!
+                </div>
+                <br>
+
+                <div>
+                    <input formControlName="emailpassword" class="form-control" id="exampleEmail" type="email"
+                        class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                        placeholder="Entrez adresse email ..." size="50"  style="margin-left: 85px;" >
+                    <div *ngIf="emailpassword.touched && emailpassword.invalid" class="text-danger">
+                        <div *ngIf="emailpassword.errors.required">
+                            <small style="margin-left: 86px;"> * L'adresse email est obligatoire</small>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button style="color: rgb(2, 2, 37); margin-left: 145px;" routerLink="/signin" [disabled]="passwordForm.invalid"
+                    class="btn-block">
+                    Réinitialiser
+                </button>
+
+
+
+            </form>
+
+        </div>
+    </div>
+</body>
