@@ -1,0 +1,680 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+
+    <!-- End of Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Ajouter Utilisateur</h1>
+
+                </div>
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col">
+                        <div class="card shadow mb-4" style="width:40rem; margin-left: 150px;">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                                style="text-align:left;">
+                                <h6 class="m-0 font-weight-bold text-primary " class="titre">Champs de l'utilisateur
+                                </h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body" style="margin: 30px; margin-top: 15px ;">
+
+                                <form [formGroup]="userAddForm" (ngSubmit)="userUser()">
+                                    <div class="form-group row">
+
+                                        <div class="col-md-6">
+                                            <label for="nom" style="color: rgb(1, 4, 48);">Nom</label>
+                                            <input type="text" formControlName="nom" class="form-control"
+                                                class="form-control form-control-user" id="exampleNom"> <br>
+                                            <div *ngIf="nom.touched && nom.invalid" class="text-danger">
+                                                <div *ngIf="nom.errors.required" style="margin-top: -25px;">
+                                                    <small>* Nom obligatoire</small>
+                                                </div>
+                                                <div *ngIf="nom.errors.minlength">
+                                                    <small>* Nom invalide</small>>
+                                                </div>
+                                                <div *ngIf="nom.errors.pattern">
+                                                    <small>* Nom invalide</small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prenom" style="color: rgb(1, 4, 48);">Prenom</label>
+                                            <input type="text" formControlName="prenom" class="form-control"
+                                                class="form-control form-control-user" id="examplePrenom">
+
+                                            <div *ngIf="prenom.touched && prenom.invalid" class="text-danger">
+                                                <div *ngIf="prenom.errors.required">
+                                                    <small>*Prenom obligatoire</small>
+                                                </div>
+                                                <div *ngIf="prenom.errors.minlength">
+                                                    <small>*Prenom invalide</small>>
+                                                </div>
+                                                <div *ngIf="prenom.errors.pattern">
+                                                    <small>*Prenom invalide</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="email" style="color: rgb(1, 4, 48);">Email</label>
+                                            <input type="email" formControlName="email" class="form-control"
+                                                class="form-control form-control-user" id="exampleEmail">
+
+                                            <div *ngIf="email.touched && email.invalid" class="text-danger">
+                                                <div *ngIf="email.errors.required">
+                                                    <small>* Email obligatoire</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="password" style="color: rgb(1, 4, 48);">Password</label>
+                                            <input type="password" formControlName="password" class="form-control"
+                                                class="form-control form-control-user" id="examplePassword">
+
+                                            <div *ngIf="password.touched && password.invalid" class="text-danger">
+                                                <div *ngIf="password.errors.required">
+                                                    <small>* Mot de passe obligatoire</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6"><br>
+                                            <label for="phone" style="color: rgb(1, 4, 48);">Telephone</label>
+                                            <input type="text" formControlName="phone" class="form-control"
+                                                class="form-control form-control-user" id="examplePhone">
+                                            <br>
+                                        </div>
+
+                                        <!-- <div class="col-md-6"><br>
+                                            <label for="fonctionnalite"> </label>
+                                            <a href="#" data-toggle="modal" data-target="#fonctModal">
+                                                <button type="text" class="form-control" class="form-control form-control-user"
+                                                    id="exampleFonctionnalite"
+                                                    style="background: url(/assets/images/etoiles2.jpg) no-repeat center / cover ; color: white; margin-top: 8px;">
+                                                    Choisir Fonctionnalité</button>
+                                            </a>
+
+                                            <div *ngIf="fonctionnalite.touched && fonctionnalite.invalid"
+                                                class="text-danger">
+                                                <div *ngIf="fonctionnalite.errors.required">
+                                                    <small>* Fonctionnalité Obligatoire</small>
+                                                </div>
+                                            </div>
+
+                                        </div> -->
+
+                                        <div class="col-md-6"><br>
+                                            <label for="fonctionnalite" style="color: rgb(1, 4, 48);">Fonctionnalité</label> 
+                                            <select formControlName="fonctionnalite" class="form-control"
+                                                class="form-control form-control-user" id="exampleFonctionnalite"> 
+                                                <option>Identification et geolocalisation des projets</option>
+                                                <option>Gestion Financiere</option>
+                                                <option>Suivi des Travaux</option>
+                                             </select>
+
+                                            <div *ngIf="fonctionnalite.touched && fonctionnalite.invalid" class="text-danger">
+                                                <div *ngIf="fonctionnalite.errors.required">
+                                                    <small>* Fonctionnalité obligatoire</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col mb-3 mb-sm-0">
+                                            <button [disabled]="userAddForm.invalid" (click)="userUser()" type="submit"
+                                                class="btn btn-sm color">
+                                                <i class="fa fa-plus"></i> Ajouter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Sur de vouloir quitter votre session?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body"> Sélectionnez «Déconnexion» ci-dessous si vous êtes prêt à quitter votre session en
+                cours.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-primary" routerLink="/signin">Deconnexion</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- fonctionnalite modal -->
+<!-- <form [formGroup]="userForm" >
+<div style="margin-left: 127px;" class="modal fade" id="fonctModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           
+            <div class="row">
+                <div class="col-6" style="max-height: 100px"><span _ngcontent-bjt-c23=""
+                        class="titreModal m-t-30 m-l-30 float-left">Fonctionnalité</span></div>
+                <div class="col-6" style="max-height: 100px">
+                    <button [disabled]="userForm.invalid" data-dismiss="modal"
+                        class="btn btn-success btn-lg btn-block float-right m-t-30 m-r-30 m-b-20" style="
+                                               height: 34px;
+                                               width: 128px;
+                                               border-radius: 4px;
+                                               background-color: #02006b;
+                                               height: 34px;
+                                               width: 128px;
+                                               border-radius: 4px;
+                                               color: #fff;
+                                               font-family: Arial;
+                                               font-size: 16px;
+                                               line-height: 18px;
+                                               text-align: center; " type="button" (click)="UserPop()"><span
+                            aria-label="Open" > Choisir </span>
+                    </button>
+                    <button  id="closeModalButton" data-toggle="modal" data-target="#deleteModal" class="btn btn-default"                          
+                    data-dismiss="modal" class="btn btn-lg btn-block btn-light float-right m-t-30 m-r-10 m-b-20" style="
+                                                   height: 34px;
+                                                   border-radius: 4px;
+                                                   height: 34px;
+                                                   width: 128px;
+                                                   border-radius: 4px;
+                                                   font-family: Arial;
+                                                   font-size: 16px;
+                                                   line-height: 18px;
+                                                   text-align: center;" type="button">
+                      <span>Annuler</span>
+                    </button>
+                </div>
+                <div class="col m-l-30 m-r-30 div-permission">
+                    <br>
+                    <div class="row">
+                        <label for="fonctionnalite"></label>
+                        <select class="form-control" formControlName="fonctionnalite" id="examplefonctionnalite" style="margin-left: 35px; width: 150px;"> 
+
+                             <option selected="selected"> Autorisation </option> 
+                        </select>
+                        <div *ngIf="fonctionnalite.touched && fonctionnalite.invalid" class="text-danger">
+                            <div *ngIf="fonctionnalite.errors.required">
+                                <small>* Champ obligatoire</small>
+                            </div>
+                        </div>
+
+                    </div> 
+
+                    <div class="nav-item active">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+
+                            <span style="padding:10px">Pour plus de détails &nbsp;
+                                <i _ngcontent-gsq-c27="" class="fa fa-chevron-right"></i></span>
+
+                            <br>
+                        </a>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <div _ngcontent-bjt-c23=""
+                                    class="row default-according style-1 faq-accordion ng-star-inserted">
+                                    <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                        <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                            style="border: 1px solid #e0e0e0">
+                                            <div _ngcontent-bjt-c23="" class="card-header"
+                                                style="background-color: none !important">
+                                                <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                        aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                        aria-expanded="true">
+                                                        <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-help-circle"
+                                                                _ngcontent-bjt-c11="">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                                </path>
+                                                                <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                            </svg>
+                                                        </div> Identification et geolocalisation des projets
+                                                    </button>
+                                                    <div _ngcontent-bjt-c23="" class="float-right" style="
+                                              position: absolute;
+                                              top: 21px;
+                                              right: 38px;
+                                              color: #525f7f;
+                                              font-family: Nunito;
+                                              font-size: 9px;
+                                              line-height: 19px;
+                                            "></div>
+                                                </h5>
+                                            </div>
+                                            <div _ngcontent-bjt-c23="" class="collapse show"
+                                                style="background-color: white">
+                                                <div _ngcontent-bjt-c23="" class="row">
+                                                    <div _ngcontent-bjt-c23="" class="col-12">
+                                                        <table _ngcontent-bjt-c23="" class="table" style="
+                                                font-family: Nunito;
+                                                font-size: 14px;
+                                                line-height: 19px;
+                                              ">
+                                                            <thead style="color:rgb(2, 3, 54);" _ngcontent-bjt-c23=""
+                                                                class="header">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <th _ngcontent-bjt-c23=""></th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        CONSULTER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        AJOUTER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        MODIFIER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        SUPPRIMER </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Eligibilite </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+
+
+                                                                <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Projets</td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Gouvernorats </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Communes </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Quartiers</td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+  
+                                <div _ngcontent-bjt-c23=""
+                                    class="row default-according style-1 faq-accordion ng-star-inserted">
+                                    <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                        <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                            style="border: 1px solid #e0e0e0">
+                                            <div _ngcontent-bjt-c23="" class="card-header"
+                                                style="background-color: none !important">
+                                                <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                        aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                        aria-expanded="true">
+                                                        <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-help-circle"
+                                                                _ngcontent-bjt-c11="">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                                </path>
+                                                                <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                            </svg>
+                                                        </div> Financement
+                                                    </button>
+                                                    <div _ngcontent-bjt-c23="" class="float-right" style="
+                                              position: absolute;
+                                              top: 21px;
+                                              right: 38px;
+                                              color: #02206e;
+                                              font-family: Nunito;
+                                              font-size: 9px;
+                                              line-height: 19px;
+                                            "></div>
+                                                </h5>
+                                            </div>
+                                            <div _ngcontent-bjt-c23="" class="collapse show"
+                                                style="background-color: white">
+                                                <div _ngcontent-bjt-c23="" class="row">
+                                                    <div _ngcontent-bjt-c23="" class="col-12">
+                                                        <table _ngcontent-bjt-c23="" class="table" style="
+                                                font-family: Nunito;
+                                                font-size: 14px;
+                                                line-height: 19px;
+                                              ">
+                                                            <thead style="color:rgb(2, 3, 54);" _ngcontent-bjt-c23=""
+                                                                class="header">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <th _ngcontent-bjt-c23=""></th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        CONSULTER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        AJOUTER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        MODIFIER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        SUPPRIMER </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Decomptes </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Factures </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Bailleurs de fond</td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left"> Schemas
+                                                                        de financement </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div _ngcontent-bjt-c23=""
+                                    class="row default-according style-1 faq-accordion ng-star-inserted">
+                                    <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                        <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                            style="border: 1px solid #e0e0e0">
+                                            <div _ngcontent-bjt-c23="" class="card-header"
+                                                style="background-color: none !important">
+                                                <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                        aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                        aria-expanded="true">
+                                                        <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-help-circle"
+                                                                _ngcontent-bjt-c11="">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                                </path>
+                                                                <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                            </svg>
+                                                        </div> Travaux
+                                                    </button>
+                                                    <div _ngcontent-bjt-c23="" class="float-right" style="
+                                              position: absolute;
+                                              top: 21px;
+                                              right: 38px;
+                                              color: #052985;
+                                              font-family: Nunito;
+                                              font-size: 9px;
+                                              line-height: 19px;
+                                            "></div>
+                                                </h5>
+                                            </div>
+                                            <div _ngcontent-bjt-c23="" class="collapse show"
+                                                style="background-color: white">
+                                                <div _ngcontent-bjt-c23="" class="row">
+                                                    <div _ngcontent-bjt-c23="" class="col-12">
+                                                        <table _ngcontent-bjt-c23="" class="table" style="
+                                                font-family: Nunito;
+                                                font-size: 14px;
+                                                line-height: 19px;
+                                              ">
+                                                            <thead style="color:rgb(2, 3, 54);" _ngcontent-bjt-c23=""
+                                                                class="header">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <th _ngcontent-bjt-c23=""></th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        CONSULTER </th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        AJOUTER</th>
+                                                                    <th _ngcontent-bjt-c23="" class="text-center">
+                                                                        MODIFIER </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Avancement des travaux </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr _ngcontent-bjt-c23="">
+                                                                    <td _ngcontent-bjt-c23="" class="text-left">
+                                                                        Documents et ordres de services </td>
+                                                                    <td _ngcontent-bjt-c23=""> <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+                                                                    <td _ngcontent-bjt-c23="">
+                                                                        <input type="checkbox">
+                                                                    </td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</form> -->
