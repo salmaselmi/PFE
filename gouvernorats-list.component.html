@@ -1,0 +1,306 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+
+    <!-- End of Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Liste des gouvernorats</h1>
+                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                </div>
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+
+                    <!-- Pie Chart -->
+
+
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+
+                            <!-- Card Body2 -->
+                            <div class="card-body">
+
+
+                                <div class="card-body">
+                                    <h2 class="projetsTitre">Gouvernorats</h2><br>
+
+                                    <table class="table table-sm">
+                                        <thead  style="background-color: rgb(236, 246, 255); color: black;">
+                                            <tr>
+                                                <th>Id  </th>
+                                                <th>Nom gouv FR</th>
+                                                <th>Nom gouv AR</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            <tr *ngFor="let gouvernorat of gouvernoratsList">
+                                                <th>{{gouvernorat.Idgouv}}</th>
+                                                <th>{{gouvernorat.NomGouvernoratFR}}</th>
+                                                <th>{{gouvernorat.NomGouvernoratAR}}</th>
+
+                                                <th>
+
+
+                                                    <button class="dropdown-item" href="#" data-toggle="modal"
+                                                        data-target="#oneModal" class="btn btn-sm btn-consult" style="margin-right:-6px;">
+                                                        <i class="fal fa-eye"></i>
+                                                    </button>
+                                                    <button  (click)="updateGouvernorat(Gouvernorat._id)" class="dropdown-item" href="#" data-toggle="modal"
+                                                        data-target="#updateModal" class="btn btn-sm btn-warning mx-3">
+                                                        <i class="fa fa-pen"></i>
+                                                    </button>
+
+                                                    <button class="dropdown-item" class="btn btn-sm btn-danger" href="#"
+                                                        data-toggle="modal" data-target="#deleteModal" (click)="deleteRow(gouvernorat)" >
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <button routerLink="/gouvernorats/add" class="bouton btn btn-primary btn-sm my-3">
+                                        <i class="fa fa-plus"></i> Ajouter </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Sur de vouloir quitter votre session?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body"> Sélectionnez «Déconnexion» ci-dessous si vous êtes prêt à quitter votre session
+                    en cours.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" routerLink="/signin">Deconnexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Sur de vouloir supprimer le gouvernorat?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body"> Sélectionnez «Supprimer» si vous souhaitez retirer ce gouvernorat</div>
+                <div class="modal-footer">
+                    <button id="closeModalButton" data-toggle="modal"data-target="#deleteModal" class="btn btn-default"                          
+                    data-dismiss="modal">Annuler</button>             
+                   <a class="btn btn-primary" routerLink="/gouvernorats/list" (click)="delete()">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Modal-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Modifier Gouvernorat</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <label for="fname">Id : </label>
+                        <input type="text" id="fname" name="fname"
+                           style="margin-left:161px; width:9rem; height: 1.55rem;"><br>
+                        <label>Nom gouv FR: </label>
+                        <select style="margin-left:20px;width:9rem;">
+                            <option value="Ariana">Ariana</option>
+                            <option value="Beja">Beja</option>
+                            <option value="Ben Arous">Ben Arous</option>
+                            <option value="Bizerte">Bizerte</option>
+                            <option value="Gabes">Gabes</option>
+                            <option value="Gafsa">Gafsa</option>
+                            <option value="Jendouba">Jendouba</option>
+                            <option value="Kairouan">Kairouan</option>
+                            <option value="Kasserine">Kasserine</option>
+                            <option value="Kebili">Kebili</option>
+                            <option value="Le Kef">Le Kef</option>
+                            <option value="Mahdia">Mahdia</option>
+                            <option value="Manouba">Manouba</option>
+                            <option value="Medenine">Medenine</option>
+                            <option value="Monastir">Monastir</option>
+                            <option value="Nabeul">Nabeul</option>
+                            <option value="Sfax">Sfax</option>
+                            <option value="Sidi Bouzid">Sidi Bouzid</option>
+                            <option value="Siliana">Siliana</option>
+                            <option value="Sousse">Sousse</option>
+                            <option value="Tataouine">Tataouine</option>
+                            <option value="Tozeur">Tozeur</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Zaghouan">Zaghouan</option>
+
+
+                        </select><br>
+
+                        <label>Nom gouv AR: </label>
+                        <select style="margin-left:18px;width:9rem;">
+                            <option value="أريانة ">أريانة</option>
+                            <option value="منوبة">منوبة</option>
+                            <option value="بن عروس"> بن عروس</option>
+                            <option value="بنزرت">بنزرت</option>
+                            <option value=" نابل">نابل</option>
+                            <option value="زغوان">زغوان</option>
+                            <option value="باجة">باجة</option>
+                            <option value="جندوبة">جندوبة</option>
+                            <option value="الكاف">الكاف</option>
+                            <option value="سليانة">سليانة</option>
+                            <option value="القيروان">القيروان</option>
+                            <option value="سوسة">سوسة</option>
+                            <option value="المنستير">المنستير</option>
+                            <option value="المهدية">المهدية</option>
+                            <option value="صفاقس">صفاقس</option>
+                            <option value="سيدي بوزيد "> سيدي بوزيد </option>
+                            <option value="القصرين"> القصرين</option>
+                            <option value="قفصة">قفصة</option>
+                            <option value="قابس">قابس</option>
+                            <option value="توزر">توزر</option>
+                            <option value="قبلي">قبلي</option>
+                            <option value="مدنين">مدنين</option>
+                            <option value="  تونس "> تونس </option> 
+                            <option value=" تطاوين ">تطاوين</option> 
+
+                        </select><br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" routerLink="/gouvernorats/list">Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <!-- one Modal-->
+    <div class="modal fade" id="oneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               
+                <div class="card-body"> 
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <ul _ngcontent-tby-c26="" class="nav nav-tabs justify-content-start d-md-flex d-none"
+                        role="tablist" >
+                        <li _ngcontent-tby-c26="" class="nav-item" ><a _ngcontent-tby-c26=""
+                                class="nav-link active" id="ngb-tab-1" role="tab" style="background-color: rgb(3, 39, 80); color: white;">
+                                <div _ngcontent-tby-c26="" >   INFORMATIONS Gouvernorat <div _ngcontent-tby-c26=""
+                                        class="material-border"></div>
+                                        
+                                </div>
+                            </a></li>
+                    
+                    </ul>
+                    <div _ngcontent-tby-c27="" class="card-body">
+                        <div _ngcontent-tby-c27="" class="card-title d-md-none"> Informations </div>
+                        <div _ngcontent-tby-c27=""
+                            class="p-3 d-flex flex-column flex-sm-row align-items-center">
+                            <div _ngcontent-tby-c27="" class="form-group p-2 col">
+                                <div _ngcontent-tby-c27="" class="block-text"><span _ngcontent-tby-c27=""
+                                        class="text-secondary">Id </span>
+                                    <div _ngcontent-tby-c27=""><span _ngcontent-tby-c27=""
+                                            class="text-dark" style="text-transform: uppercase;font-weight:bold;"> --- </span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div _ngcontent-tby-c27=""
+                        class="p-3 d-flex flex-column flex-sm-row align-items-center">
+                            <div _ngcontent-tby-c27="" class="form-group p-2 col">
+                                <div _ngcontent-tby-c27="" class="block-text"><span _ngcontent-tby-c27=""
+                                        class="text-secondary"> Nom Gouvernorat FR</span>
+                                    <div _ngcontent-tby-c27=""><span _ngcontent-tby-c27=""
+                                            class="text-dark" style="text-transform: uppercase;font-weight:bold;"> --- </span></div>
+                                </div>
+                            </div> 
+                            <div _ngcontent-tby-c27="" class="form-group p-2 col">
+                                <div _ngcontent-tby-c27="" class="block-text"><span _ngcontent-tby-c27=""
+                                        class="text-secondary"> Nom gouvernorat AR</span>
+                                    <div _ngcontent-tby-c27=""><span _ngcontent-tby-c27=""
+                                            class="text-dark" style="text-transform: uppercase;font-weight:bold;"> --- </span></div>
+                                </div>
+                            </div> 
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
