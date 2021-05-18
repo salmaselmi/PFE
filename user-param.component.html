@@ -1,0 +1,681 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+
+    <!-- End of Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Utilisateurs</h1>
+
+                </div>
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Liste des utilisateurs</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+
+                                    <div class="input-group">
+                                        <input (input)="filter($event.target.value)" type="text"
+                                            class="form-control bg-light border-0 small"
+                                            placeholder="  Rechercher utilisateur" aria-label="Search"
+                                            aria-describedby="basic-addon2" size="100px" style="margin-left: -15px;">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm "></i>
+                                            </button>
+                                        </div>
+
+                                    </div> 
+                                </form> 
+                                <p style="margin-left: 980px; margin-top: -53px; " >
+                                    <button routerLink="/user/add" class="btn btn-primary btn-sm my-3" style="padding: 7px 7px;">
+                                    <i class="fa fa-plus"></i> Ajouter
+                                </button></p>
+                                <ul style="  margin-right:10px; margin-bottom: 0.5px;" _ngcontent-yjf-c31="" class="nav-tabs nav" ngbnav="" role="tablist">
+                                    <li _ngcontent-yjf-c31="" ngbnavitem="" class="nav-item" style="color: black;"><a _ngcontent-yjf-c31="" routerLink="/user/param"
+                                              ngbnavlink="" id="ngb-nav-38"
+                                            class="nav-link active" role="tab" aria-controls="ngb-nav-38-panel"
+                                            aria-selected="true" aria-disabled="false"><i
+                                                class="fas fa-user text-warning"></i><span style="color: black; margin-left:10px">Utilisateurs  ({{userParam.length}})</span></a></li>
+
+                                </ul>
+                                <table class="table table-sm">
+                                    <thead style="background-color: rgb(228, 238, 248); color: black;">
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prenom</th> 
+                                            <th>Email</th> 
+                                            <th>Telephone</th> 
+                                            <th>Date de creation</th>
+                                            <th>Actions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let user of userParam">
+                                            <th>{{user.nom}}</th>
+                                            <th>{{user.prenom}}</th> 
+                                            <th>{{user.email}}</th> 
+                                            <th>{{user.phone}}</th> 
+                                            <th>{{user.date | date :'dd/MM/yyyy'}}</th>
+
+ 
+                                            <th>
+                                                <button [routerLink]="['/user/info', user._id]" class="btn btn-sm btn-consult">
+                                                    <i class="fal fa-eye"></i>
+                                                </button>
+
+                                                <button class="dropdown-item" [routerLink]="['/user/update', user._id]" class="btn btn-sm btn-warning mx-3">
+                                                        <i class="fa fa-pen"></i>
+                                                 </button>
+
+                                                <button class="dropdown-item" class="btn btn-sm btn-danger" href="#" data-toggle="modal" 
+                                                        data-target="#deleteModal" (click)="deleteRow(user)" > 
+                                                        <i class="fa fa-trash"></i>
+                                                   </button>
+                                            </th>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Sur de vouloir quitter votre session?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body"> Sélectionnez «Déconnexion» ci-dessous si vous êtes prêt à quitter votre session en
+                cours.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-primary" routerLink="/signin">Deconnexion</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Sur de vouloir supprimer l'utilisateur?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body"> Sélectionnez «Supprimer» si vous souhaitez retirer cet utilisateur</div>
+        <div class="modal-footer">
+            <button id="closeModalButton" data-toggle="modal"data-target="#deleteModal" class="btn btn-default"                          
+            data-dismiss="modal">Annuler</button>
+            <a class="btn btn-primary" routerLink="/user/param" (click)="delete()">Supprimer</a>
+        </div>
+    </div>
+</div>
+</div>
+ 
+ 
+  <!-- fonctionnalite modal -->
+<div style="margin-left: 127px;" class="modal fade" id="fonctModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <div class="row">
+            <div class="col-6" style="max-height: 100px"><span
+                    _ngcontent-bjt-c23=""
+                    class="titreModal m-t-30 m-l-30 float-left">Fonctionnalites</span></div>
+            <div class="col-6" style="max-height: 100px">
+                <button  routerLink="/user/param"
+                    class="btn btn-success btn-lg btn-block float-right m-t-30 m-r-30 m-b-20" style="
+                           height: 34px;
+                           width: 128px;
+                           border-radius: 4px;
+                           background-color: #02006b;
+                           height: 34px;
+                           width: 128px;
+                           border-radius: 4px;
+                           color: #fff;
+                           font-family: Arial;
+                           font-size: 16px;
+                           line-height: 18px;
+                           text-align: center; " type="button"><span
+                        aria-label="Open">Choisir</span>
+                </button>
+                <button class="btn btn-lg btn-block btn-light float-right m-t-30 m-r-10 m-b-20"
+                    style="
+                               height: 34px;
+                               border-radius: 4px;
+                               height: 34px;
+                               width: 128px;
+                               border-radius: 4px;
+                               font-family: Arial;
+                               font-size: 16px;
+                               line-height: 18px;
+                               text-align: center;" type="button"><span data-dismiss="modal"
+                        aria-label="Close">Annuler</span>
+                </button>
+            </div>
+            <div  class="col m-l-30 m-r-30 div-permission">
+                <br>
+                
+                <div _ngcontent-bjt-c23="" class="row default-according style-1 faq-accordion">
+                    <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                        <div _ngcontent-bjt-c23="" class="card m-t-10"
+                            style="border: 1px solid #e0e0e0">
+                            <div _ngcontent-bjt-c23="" class="card-header"
+                                style="background-color: none !important">
+                                <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                        aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                        aria-expanded="true">
+                                        <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-help-circle"
+                                                _ngcontent-bjt-c11="">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                </path>
+                                                <line x1="12" y1="17" x2="12" y2="17"></line>
+                                            </svg>
+                                        </div> Autorisation
+                                    </button>
+                                    <div _ngcontent-bjt-c23="" class="float-right" style="
+                  position: absolute;
+                  top: 21px;
+                  right: 38px;
+                  color: #525f7f;
+                  font-family: Nunito;
+                  font-size: 9px;
+                  line-height: 19px;
+                ">
+                                    </div>
+                                </h5>
+                            </div>
+                            <div _ngcontent-bjt-c23="" class="collapse show"
+                                style="background-color: white">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+
+
+                <div class="nav-item active">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                       
+                        <span style="padding:10px">Pour plus de détails &nbsp;
+                            <i _ngcontent-gsq-c27="" class="fa fa-chevron-right"></i></span>
+
+                            <br>
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <div _ngcontent-bjt-c23=""
+                            class="row default-according style-1 faq-accordion ng-star-inserted">
+                            <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                    style="border: 1px solid #e0e0e0">
+                                    <div _ngcontent-bjt-c23="" class="card-header"
+                                        style="background-color: none !important">
+                                        <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                aria-expanded="true">
+                                                <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-help-circle"
+                                                        _ngcontent-bjt-c11="">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                        </path>
+                                                        <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                    </svg>
+                                                </div> Identification et geolocalisation des projets
+                                            </button>
+                                            <div _ngcontent-bjt-c23="" class="float-right" style="
+                          position: absolute;
+                          top: 21px;
+                          right: 38px;
+                          color: #525f7f;
+                          font-family: Nunito;
+                          font-size: 9px;
+                          line-height: 19px;
+                        "></div>
+                                        </h5>
+                                    </div>
+                                    <div _ngcontent-bjt-c23="" class="collapse show"
+                                        style="background-color: white">
+                                        <div _ngcontent-bjt-c23="" class="row">
+                                            <div _ngcontent-bjt-c23="" class="col-12">
+                                                <table _ngcontent-bjt-c23="" class="table" style="
+                            font-family: Nunito;
+                            font-size: 14px;
+                            line-height: 19px;
+                          ">
+                                                    <thead style="color:rgb(2, 3, 54);"
+                                                        _ngcontent-bjt-c23="" class="header">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <th _ngcontent-bjt-c23=""></th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                CONSULTER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                AJOUTER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                MODIFIER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                SUPPRIMER </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Eligibilite </td>
+                                                            <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">  
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                        <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Projets</td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr>
+
+                                                        <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Gouvernorats </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr>
+
+                                                        <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Communes </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr>
+
+                                                        <tr style="color:black;" _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Quartiers</td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                        <div _ngcontent-bjt-c23=""
+                            class="row default-according style-1 faq-accordion ng-star-inserted">
+                            <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                    style="border: 1px solid #e0e0e0">
+                                    <div _ngcontent-bjt-c23="" class="card-header"
+                                        style="background-color: none !important">
+                                        <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                aria-expanded="true">
+                                                <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-help-circle"
+                                                        _ngcontent-bjt-c11="">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                        </path>
+                                                        <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                    </svg>
+                                                </div> Financement
+                                            </button>
+                                            <div _ngcontent-bjt-c23="" class="float-right" style="
+                          position: absolute;
+                          top: 21px;
+                          right: 38px;
+                          color: #02206e;
+                          font-family: Nunito;
+                          font-size: 9px;
+                          line-height: 19px;
+                        "></div>
+                                        </h5>
+                                    </div>
+                                    <div _ngcontent-bjt-c23="" class="collapse show"
+                                        style="background-color: white">
+                                        <div _ngcontent-bjt-c23="" class="row">
+                                            <div _ngcontent-bjt-c23="" class="col-12">
+                                                <table _ngcontent-bjt-c23="" class="table" style="
+                            font-family: Nunito;
+                            font-size: 14px;
+                            line-height: 19px;
+                          ">
+                                                    <thead style="color:rgb(2, 3, 54);"
+                                                        _ngcontent-bjt-c23="" class="header">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <th _ngcontent-bjt-c23=""></th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                CONSULTER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                AJOUTER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                MODIFIER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                SUPPRIMER </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Decomptes </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr> 
+                                                        
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Factures </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr> 
+                                                        
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Bailleurs de fond</td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                        </tr>
+
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left"> Schemas de financement </td>
+                                                            <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">  
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                            <td _ngcontent-bjt-c23="">
+                                                                <input type="checkbox" >  
+                                                            </td>
+                                                        </tr>
+                                                         
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                        
+                        <!---->
+                        <div _ngcontent-bjt-c23=""
+                            class="row default-according style-1 faq-accordion ng-star-inserted">
+                            <div _ngcontent-bjt-c23="" class="col m-l-20 m-r-20">
+                                <div _ngcontent-bjt-c23="" class="card m-t-20"
+                                    style="border: 1px solid #e0e0e0">
+                                    <div _ngcontent-bjt-c23="" class="card-header"
+                                        style="background-color: none !important">
+                                        <h5 _ngcontent-bjt-c23="" class="mb-0"><button _ngcontent-bjt-c23=""
+                                                aria-controls="collapse" class="btn btn-link collapsed pl-0"
+                                                aria-expanded="true">
+                                                <div _ngcontent-bjt-c23="" _nghost-bjt-c11="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-help-circle"
+                                                        _ngcontent-bjt-c11="">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3">
+                                                        </path>
+                                                        <line x1="12" y1="17" x2="12" y2="17"></line>
+                                                    </svg>
+                                                </div> Travaux
+                                            </button>
+                                            <div _ngcontent-bjt-c23="" class="float-right" style="
+                          position: absolute;
+                          top: 21px;
+                          right: 38px;
+                          color: #052985;
+                          font-family: Nunito;
+                          font-size: 9px;
+                          line-height: 19px;
+                        "></div>
+                                        </h5>
+                                    </div>
+                                    <div _ngcontent-bjt-c23="" class="collapse show"
+                                        style="background-color: white">
+                                        <div _ngcontent-bjt-c23="" class="row">
+                                            <div _ngcontent-bjt-c23="" class="col-12">
+                                                <table _ngcontent-bjt-c23="" class="table" style="
+                            font-family: Nunito;
+                            font-size: 14px;
+                            line-height: 19px;
+                          ">
+                                                    <thead style="color:rgb(2, 3, 54);"
+                                                        _ngcontent-bjt-c23="" class="header">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <th _ngcontent-bjt-c23=""></th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                CONSULTER </th>
+                                                             <th _ngcontent-bjt-c23="" class="text-center">
+                                                                   AJOUTER</th>
+                                                            <th _ngcontent-bjt-c23="" class="text-center">
+                                                                MODIFIER </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color:black;" _ngcontent-bjt-c23="">
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Avancement des travaux </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                
+                                                        </tr>
+                                                        <tr _ngcontent-bjt-c23="">
+                                                            <td _ngcontent-bjt-c23="" class="text-left">
+                                                                Documents et ordres de services </td>
+                                                                <td _ngcontent-bjt-c23="">                                                                                      <input type="checkbox" > 
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">  
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                <td _ngcontent-bjt-c23="">
+                                                                    <input type="checkbox" >  
+                                                                </td>
+                                                                
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                         
+                        <!---->
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+               
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
